@@ -1,4 +1,4 @@
-import { faEye } from "@fortawesome/free-regular-svg-icons";
+import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
@@ -34,16 +34,18 @@ function Confirmation(props) {
         defaultValue={formData.username}
         placeholder="Username"></input>
 
-      <input
-        type={passwordShown ? "text" : "password"}
-        name="password"
-        defaultValue={formData.password}
-        placeholder="Password"></input>
-      <FontAwesomeIcon
-        icon={faEye}
-        className="togglePassword"
-        onClick={() => setPasswordShown(!passwordShown)}
-      />
+      <div className="passwordField">
+        <input
+          type={passwordShown ? "text" : "password"}
+          name="password"
+          defaultValue={formData.password}
+          placeholder="Password"></input>
+        <FontAwesomeIcon
+          icon={passwordShown ? faEye : faEyeSlash}
+          className="togglePassword"
+          onClick={() => setPasswordShown(!passwordShown)}
+        />
+      </div>
       <div className="interact-btns">
         <button onClick={() => setPage(page - 1)}>Previous</button>
         <button>Finish</button>

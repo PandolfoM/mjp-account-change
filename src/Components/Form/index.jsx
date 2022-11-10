@@ -1,4 +1,4 @@
-import { faEye } from "@fortawesome/free-regular-svg-icons";
+import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import usePasswordValidation from "../../hooks/usePasswordValidation";
@@ -74,27 +74,31 @@ function Form(props) {
         defaultValue={formData.username}
         placeholder="Username"></input>
 
-      <input
-        type={passwordShown ? "text" : "password"}
-        name="password"
-        defaultValue={formData.password}
-        placeholder="Password"></input>
-      <FontAwesomeIcon
-        icon={faEye}
-        className="togglePassword"
-        onClick={() => setPasswordShown(!passwordShown)}
-      />
+      <div className="passwordField">
+        <input
+          type={passwordShown ? "text" : "password"}
+          name="password"
+          defaultValue={formData.password}
+          placeholder="Password"></input>
+        <FontAwesomeIcon
+          icon={passwordShown ? faEye : faEyeSlash}
+          className="togglePassword"
+          onClick={() => setPasswordShown(!passwordShown)}
+        />
+      </div>
 
-      <input
-        type={passwordShown ? "text" : "password"}
-        name="passwordConfirm"
-        defaultValue={formData.passwordConfirm}
-        placeholder="Confirm Password"></input>
-      <FontAwesomeIcon
-        icon={faEye}
-        className="togglePassword"
-        onClick={() => setPasswordShown(!passwordShown)}
-      />
+      <div className="passwordField">
+        <input
+          type={passwordShown ? "text" : "password"}
+          name="passwordConfirm"
+          defaultValue={formData.passwordConfirm}
+          placeholder="Confirm Password"></input>
+        <FontAwesomeIcon
+          icon={passwordShown ? faEye : faEyeSlash}
+          className="togglePassword"
+          onClick={() => setPasswordShown(!passwordShown)}
+        />
+      </div>
 
       <ul>
         <li className={validLength ? "success" : "error"}>12 Characters</li>

@@ -65,6 +65,21 @@ fieldset {
   justify-content: space-around;
 }
 
+.passwordField {
+  position: relative;
+  overflow: hidden;
+}
+
+.passwordField > input {
+  width: 100%;
+}
+
+.passwordField > svg {
+  position: absolute;
+  top: 1px;
+  right: 10px;
+}
+
 /* utils */
 .invisible {
   opacity: 0;
