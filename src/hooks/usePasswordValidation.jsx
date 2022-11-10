@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 
-export const usePasswordValidation = ({
+export default function usePasswordValidation({
   firstPassword = "",
   secondPassword = "",
   requiredLength = 8,
-}) => {
+}) {
   const [validLength, setValidLength] = useState(null);
   const [hasNumber, setHasNumber] = useState(null);
   const [upperCase, setUpperCase] = useState(null);
@@ -22,4 +22,4 @@ export const usePasswordValidation = ({
   }, [firstPassword, secondPassword, requiredLength]);
 
   return [validLength, hasNumber, upperCase, lowerCase, match, specialChar];
-};
+}

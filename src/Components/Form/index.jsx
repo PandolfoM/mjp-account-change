@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { usePasswordValidation } from "../../hooks/usePasswordValidation";
+import usePasswordValidation from "../../hooks/usePasswordValidation";
 function Form(props) {
   const { formData, setFormData, page, setPage } = props;
   const [error, setError] = useState("");
@@ -16,7 +16,6 @@ function Form(props) {
       ...formData,
       [name]: value,
     });
-
   };
 
   const validateInfo = (e) => {
@@ -30,12 +29,15 @@ function Form(props) {
       specialChar &&
       formData.email.match(regex)
     ) {
-      setError("")
+      setError("");
       setPage(page + 1);
     }
 
     if (!formData.email.match(regex)) {
       return setError("Not a valid email!");
+    }
+    if (!validLength || !hasNumber || !upperCase || !match || !specialChar) {
+      return setError("Password does not meet requirements!");
     }
   };
 

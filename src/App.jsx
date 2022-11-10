@@ -1,7 +1,6 @@
 import { useState } from "react";
-import AccountInfo from "./Components/AccountInfo";
-import Confirmation from "./Components/Confirmation";
-import Form from "./Components/Form";
+import Confirmation from "./components/Confirmation";
+import Form from "./components/Form";
 import "./index.css";
 
 function App() {
