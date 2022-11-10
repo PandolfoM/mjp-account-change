@@ -22,18 +22,22 @@ body {
 
 .form {
   padding: 1rem;
-  display: flex;
-  flex-direction: column;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: flex-start; */
   width: 50vw;
   max-width: 40rem;
   height: 30rem;
-  justify-content: flex-start;
   position: relative;
   flex: 1;
   background-color: white;
   box-shadow: 3px 5px 10px 1px rgba(0, 0, 0, 0.5);
   border-radius: 1rem;
   overflow: hidden;
+}
+
+.form > * {
+  width: 100%;
 }
 
 .interact-btns {
@@ -78,4 +82,9 @@ li {
 
 .success {
   color: limegreen;
+}
+
+.togglePassword {
+  cursor: pointer;
+  margin-left: -25px;
 }

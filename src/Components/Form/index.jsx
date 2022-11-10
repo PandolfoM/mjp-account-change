@@ -1,8 +1,11 @@
+import { faEye } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import usePasswordValidation from "../../hooks/usePasswordValidation";
 function Form(props) {
   const { formData, setFormData, page, setPage } = props;
   const [error, setError] = useState("");
+  const [passwordShown, setPasswordShown] = useState(false);
   const [validLength, hasNumber, upperCase, lowerCase, match, specialChar] =
     usePasswordValidation({
       firstPassword: formData.password,
@@ -64,15 +67,25 @@ function Form(props) {
 
       <label htmlFor="password">Password:</label>
       <input
-        type="password"
+        type={passwordShown ? "text" : "password"}
         name="password"
         defaultValue={formData.password}></input>
+      <FontAwesomeIcon
+        icon={faEye}
+        className="togglePassword"
+        onClick={() => setPasswordShown(!passwordShown)}
+      />
 
       <label htmlFor="passwordConfirm">Confirm Password:</label>
       <input
-        type="password"
+        type={passwordShown ? "text" : "password"}
         name="passwordConfirm"
         defaultValue={formData.passwordConfirm}></input>
+      <FontAwesomeIcon
+        icon={faEye}
+        className="togglePassword"
+        onClick={() => setPasswordShown(!passwordShown)}
+      />
 
       <ul>
         <li className={validLength ? "success" : "error"}>12 Characters</li>
