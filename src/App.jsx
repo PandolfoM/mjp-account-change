@@ -1,38 +1,37 @@
+import { useState } from "react";
+import AccountInfo from "./Components/AccountInfo";
+import SelectType from "./Components/SelectType";
 import "./index.css";
 
 function App() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("submitted");
-  };
+  const [page, setPage] = useState(0);
+  const [formData, setFormData] = useState({
+    type: 1,
+  });
 
+  const componentList = [
+    <SelectType
+      formData={formData}
+      setFormData={setFormData}
+      page={page}
+      setPage={setPage}
+    />,
+    <AccountInfo
+      formData={formData}
+      setFormData={setFormData}
+      page={page}
+      setPage={setPage}
+    />,
+  ];
   //todo password = 12 char, case change, number, symbol
+  // ! Stages :
+  // ! 1: change type
+  // ! 2: enter change details
+  // ! 3: confirm changes
   return (
     <div className="container">
       <h1>MJP Form</h1>
-      <form onSubmit={handleSubmit}>
-        <legend>Update Password</legend>
-        <label htmlFor="user">Name:</label>
-        <input type="user" name="user"></input>
-        <label htmlFor="network">Network Name:</label>
-        <input type="network" name="network"></input>
-        <label htmlFor="email">Email:</label>
-        <input type="email" name="email"></input>
-        <label htmlFor="password">Password:</label>
-        <input type="password" name="password"></input>
-        <div>
-          {/* username, password */}
-          {/* all stores or select stores */}
-          <input type="radio" id="newpass" name="selectType"></input>
-          <label htmlFor="newpass">New User Account</label>
-        </div>
-        <div>
-          {/* username and password */}
-          <input type="radio" id="changepass" name="selectType"></input>
-          <label htmlFor="changepass">Change Password</label>
-        </div>
-        <button type={"submit"}>Submit</button>
-      </form>
+      {componentList[page]}
     </div>
   );
 }
