@@ -4,7 +4,7 @@ function Confirmation(props) {
   return (
     <div className="form">
       <h2>Confirm Details</h2>
-      <h3>{formData.type === 1 ? "Reset Password" : "Create Account"}</h3>
+      <h3>{formData.type === "1" ? "Change Password" : "New Account"}</h3>
       <ul>
         <li>Name: {formData.name}</li>
         <li>Network: {formData.network}</li>

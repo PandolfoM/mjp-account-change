@@ -1,13 +1,13 @@
 import { useState } from "react";
+import { usePasswordValidation } from "../../hooks/usePasswordValidation";
 function Form(props) {
   const { formData, setFormData, page, setPage } = props;
   const [error, setError] = useState("");
-  const [passValid, setPassValid] = useState({
-    charCount: "red",
-    uppercase: "red",
-    number: "red",
-    symbol: "red",
-  });
+  const [validLength, hasNumber, upperCase, lowerCase, match, specialChar] =
+    usePasswordValidation({
+      firstPassword: formData.password,
+      secondPassword: formData.passwordConfirm,
+    });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,18 +16,27 @@ function Form(props) {
       ...formData,
       [name]: value,
     });
+
   };
 
   const validateInfo = (e) => {
     e.preventDefault();
     let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
-    if (formData.password !== formData.passwordConfirm) {
-      return setError("Passwords do not match!");
+    if (
+      validLength &&
+      hasNumber &&
+      upperCase &&
+      match &&
+      specialChar &&
+      formData.email.match(regex)
+    ) {
+      setError("")
+      setPage(page + 1);
     }
+
     if (!formData.email.match(regex)) {
       return setError("Not a valid email!");
     }
-    setPage(page + 1);
   };
 
   return (
@@ -57,25 +66,19 @@ function Form(props) {
         name="password"
         defaultValue={formData.password}></input>
 
-      {/* <ul>
-        <li style={{ color: passValid.charCount }}>12 Characters</li>
-        <li style={{ color: passValid.uppercase }}>Uppercase letter</li>
-        <li style={{ color: passValid.number }}>At least 1 number</li>
-        <li style={{ color: passValid.symbol }}>At least 1 symbol</li>
-      </ul> */}
-
       <label htmlFor="passwordConfirm">Confirm Password:</label>
       <input
         type="password"
         name="passwordConfirm"
         defaultValue={formData.passwordConfirm}></input>
 
-      {/* <PasswordChecklist
-        rules={["minLength", "specialChar", "number", "capital", "match"]}
-        minLength={12}
-        value={formData.password}
-        valueAgain={formData.passwordConfirm}
-      /> */}
+      <ul>
+        <li className={validLength ? "success" : "error"}>12 Characters</li>
+        <li className={upperCase ? "success" : "error"}>Uppercase letter</li>
+        <li className={hasNumber ? "success" : "error"}>At least 1 number</li>
+        <li className={specialChar ? "success" : "error"}>At least 1 symbol</li>
+        <li className={match ? "success" : "error"}>Passwords Match</li>
+      </ul>
 
       {/* New user or change password */}
       <fieldset>
@@ -96,7 +99,7 @@ function Form(props) {
             name="type"
             value="2"
             defaultChecked={formData.type === "2"}></input>
-          <label htmlFor="newpass">New User Account</label>
+          <label htmlFor="newpass">New Account</label>
         </div>
       </fieldset>
 
