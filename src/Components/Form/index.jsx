@@ -50,37 +50,46 @@ function Form(props) {
       noValidate
       onChange={handleChange}
       onSubmit={validateInfo}>
-      <label htmlFor="name">Name:</label>
-      <input type="text" name="name" defaultValue={formData.name}></input>
+      <input
+        type="text"
+        name="name"
+        defaultValue={formData.name}
+        placeholder="Name"></input>
 
-      <label htmlFor="network">Network Name:</label>
-      <input type="text" name="network" defaultValue={formData.network}></input>
+      <input
+        type="text"
+        name="network"
+        defaultValue={formData.network}
+        placeholder="Network Name"></input>
 
-      <label htmlFor="email">Email:</label>
-      <input type="email" name="email" defaultValue={formData.email}></input>
+      <input
+        type="email"
+        name="email"
+        defaultValue={formData.email}
+        placeholder="Email"></input>
 
-      <label htmlFor="username">Username:</label>
       <input
         type="text"
         name="username"
-        defaultValue={formData.username}></input>
+        defaultValue={formData.username}
+        placeholder="Username"></input>
 
-      <label htmlFor="password">Password:</label>
       <input
         type={passwordShown ? "text" : "password"}
         name="password"
-        defaultValue={formData.password}></input>
+        defaultValue={formData.password}
+        placeholder="Password"></input>
       <FontAwesomeIcon
         icon={faEye}
         className="togglePassword"
         onClick={() => setPasswordShown(!passwordShown)}
       />
 
-      <label htmlFor="passwordConfirm">Confirm Password:</label>
       <input
         type={passwordShown ? "text" : "password"}
         name="passwordConfirm"
-        defaultValue={formData.passwordConfirm}></input>
+        defaultValue={formData.passwordConfirm}
+        placeholder="Confirm Password"></input>
       <FontAwesomeIcon
         icon={faEye}
         className="togglePassword"

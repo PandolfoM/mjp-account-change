@@ -10,32 +10,35 @@ function Confirmation(props) {
     <form className="form" noValidate>
       <h2>Confirm Details</h2>
       <h3>{formData.type === "1" ? "Change Password" : "New Account"}</h3>
-      <label htmlFor="name">Name:</label>
-      <input type="text" name="name" value={formData.name} disabled></input>
+      <input
+        type="text"
+        name="name"
+        defaultValue={formData.name}
+        placeholder="Name"></input>
 
-      <label htmlFor="network">Network Name:</label>
       <input
         type="text"
         name="network"
-        value={formData.network}
-        disabled></input>
+        defaultValue={formData.network}
+        placeholder="Network Name"></input>
 
-      <label htmlFor="email">Email:</label>
-      <input type="email" name="email" value={formData.email} disabled></input>
+      <input
+        type="email"
+        name="email"
+        defaultValue={formData.email}
+        placeholder="Email"></input>
 
-      <label htmlFor="username">Username:</label>
       <input
         type="text"
         name="username"
-        value={formData.username}
-        disabled></input>
+        defaultValue={formData.username}
+        placeholder="Username"></input>
 
-      <label htmlFor="password">Password:</label>
       <input
         type={passwordShown ? "text" : "password"}
         name="password"
-        value={formData.password}
-        disabled></input>
+        defaultValue={formData.password}
+        placeholder="Password"></input>
       <FontAwesomeIcon
         icon={faEye}
         className="togglePassword"
