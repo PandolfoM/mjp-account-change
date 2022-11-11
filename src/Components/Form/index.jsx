@@ -7,19 +7,30 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import usePasswordValidation from "../../hooks/usePasswordValidation";
+
 function Form(props) {
   const { formData, setFormData, page, setPage } = props;
   const [error, setError] = useState("");
   const [passwordShown, setPasswordShown] = useState(false);
-  const boxRef1 = useRef(null);
+  const errorTxt = useRef(null);
 
   const [validLength, hasNumber, upperCase, lowerCase, match, specialChar] =
     usePasswordValidation({
       firstPassword: formData.password,
       secondPassword: formData.passwordConfirm,
     });
+
+  useEffect(() => {
+    if (errorTxt.current === null) return;
+    setTimeout(() => {
+      errorTxt.current.style.animation = "toast-slide-out 0.3s";
+    }, 5000);
+    setTimeout(() => {
+      setError("");
+    }, 5100);
+  }, [error]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -59,7 +70,6 @@ function Form(props) {
       noValidate
       onChange={handleChange}
       onSubmit={validateInfo}>
-
       <div className="input-container">
         <FontAwesomeIcon icon={faSignature} className="fieldIcon" />
         <input
@@ -68,7 +78,7 @@ function Form(props) {
           defaultValue={formData.name}
           placeholder="Name"></input>
       </div>
-      
+
       <div className="input-container">
         <FontAwesomeIcon icon={faNetworkWired} className="fieldIcon" />
         <input
@@ -155,13 +165,16 @@ function Form(props) {
         </div>
       </div>
 
-      {error && <h4 className="error">{error}</h4>}
-
       <div className="interact-btns">
         <button type="submit" className="nav-btn">
           Next
         </button>
       </div>
+      {error && (
+        <h4 ref={errorTxt} className="error form-error">
+          {error}
+        </h4>
+      )}
     </form>
   );
 }
