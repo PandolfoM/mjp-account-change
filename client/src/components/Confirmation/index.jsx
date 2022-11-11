@@ -34,17 +34,13 @@ function Confirmation(props) {
       form: formType,
     };
 
-    try {
-      await fetch("http://localhost:5000/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-        },
-        body: JSON.stringify(details),
-      });
-    } catch (error) {
-      setStatus("Error");
-    }
+    await fetch("http://localhost:5000/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify(details),
+    });
 
     setPage(page + 1);
   };
