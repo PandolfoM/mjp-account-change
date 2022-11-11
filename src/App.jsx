@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Confirmation from "./components/Confirmation";
 import Form from "./components/Form";
+import Success from "./components/Success";
 import "./index.css";
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
     username: "",
     password: "",
     passwordConfirm: "",
-    email: ""
+    email: "",
   });
 
   const componentList = [
@@ -28,13 +29,10 @@ function App() {
       page={page}
       setPage={setPage}
     />,
+    <Success />,
   ];
-  
-  return (
-    <div className="container">
-      {componentList[page]}
-    </div>
-  );
+
+  return <div className="container">{componentList[page]}</div>;
 }
 
 export default App;

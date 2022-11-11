@@ -1,11 +1,20 @@
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
+import {
+  faEnvelope,
+  faLock,
+  faNetworkWired,
+  faSignature,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import usePasswordValidation from "../../hooks/usePasswordValidation";
 function Form(props) {
   const { formData, setFormData, page, setPage } = props;
   const [error, setError] = useState("");
   const [passwordShown, setPasswordShown] = useState(false);
+  const boxRef1 = useRef(null);
+
   const [validLength, hasNumber, upperCase, lowerCase, match, specialChar] =
     usePasswordValidation({
       firstPassword: formData.password,
@@ -50,31 +59,45 @@ function Form(props) {
       noValidate
       onChange={handleChange}
       onSubmit={validateInfo}>
-      <input
-        type="text"
-        name="name"
-        defaultValue={formData.name}
-        placeholder="Name"></input>
 
-      <input
-        type="text"
-        name="network"
-        defaultValue={formData.network}
-        placeholder="Network Name"></input>
+      <div className="input-container">
+        <FontAwesomeIcon icon={faSignature} className="fieldIcon" />
+        <input
+          type="text"
+          name="name"
+          defaultValue={formData.name}
+          placeholder="Name"></input>
+      </div>
+      
+      <div className="input-container">
+        <FontAwesomeIcon icon={faNetworkWired} className="fieldIcon" />
+        <input
+          type="text"
+          name="network"
+          defaultValue={formData.network}
+          placeholder="Network Name"></input>
+      </div>
 
-      <input
-        type="email"
-        name="email"
-        defaultValue={formData.email}
-        placeholder="Email"></input>
+      <div className="input-container">
+        <FontAwesomeIcon icon={faEnvelope} className="fieldIcon" />
+        <input
+          type="email"
+          name="email"
+          defaultValue={formData.email}
+          placeholder="Email"></input>
+      </div>
 
-      <input
-        type="text"
-        name="username"
-        defaultValue={formData.username}
-        placeholder="Username"></input>
+      <div className="input-container">
+        <FontAwesomeIcon icon={faUser} className="fieldIcon" />
+        <input
+          type="text"
+          name="username"
+          defaultValue={formData.username}
+          placeholder="Username"></input>
+      </div>
 
-      <div className="passwordField">
+      <div className="input-container">
+        <FontAwesomeIcon icon={faLock} className="fieldIcon" />
         <input
           type={passwordShown ? "text" : "password"}
           name="password"
@@ -87,7 +110,8 @@ function Form(props) {
         />
       </div>
 
-      <div className="passwordField">
+      <div className="input-container">
+        <FontAwesomeIcon icon={faLock} className="fieldIcon" />
         <input
           type={passwordShown ? "text" : "password"}
           name="passwordConfirm"
@@ -100,7 +124,7 @@ function Form(props) {
         />
       </div>
 
-      <ul>
+      <ul className="passwordChecklist">
         <li className={validLength ? "success" : "error"}>12 Characters</li>
         <li className={upperCase ? "success" : "error"}>Uppercase letter</li>
         <li className={hasNumber ? "success" : "error"}>At least 1 number</li>
@@ -109,8 +133,8 @@ function Form(props) {
       </ul>
 
       {/* New user or change password */}
-      <fieldset>
-        <legend>Change Type</legend>
+      {/* <label>Type</label> */}
+      <div className="inline-radio">
         <div>
           <input
             type="radio"
@@ -129,13 +153,14 @@ function Form(props) {
             defaultChecked={formData.type === "2"}></input>
           <label htmlFor="newpass">New Account</label>
         </div>
-      </fieldset>
+      </div>
 
       {error && <h4 className="error">{error}</h4>}
 
       <div className="interact-btns">
-        <button className="invisible"></button>
-        <button type="submit">Next</button>
+        <button type="submit" className="nav-btn">
+          Next
+        </button>
       </div>
     </form>
   );

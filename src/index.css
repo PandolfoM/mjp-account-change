@@ -1,16 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+:root {
+  --accent-color: #1789fc;
+  --accent-color-semi-transparent: #1789fc80;
+  --accent-color-transparent: #1789fc00;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "Poppins", sans-serif;
 }
 
 html,
 body {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  height: 100%;
   background: rgb(61, 61, 61);
   background: linear-gradient(
     280deg,
@@ -20,20 +26,18 @@ body {
   );
 }
 
-.form {
+.container {
   padding: 1rem;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: flex-start; */
-  width: 50vw;
+  width: 40vw;
   max-width: 40rem;
-  height: 30rem;
-  position: relative;
-  flex: 1;
+  /* height: 40rem; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: white;
   box-shadow: 3px 5px 10px 1px rgba(0, 0, 0, 0.5);
-  border-radius: 1rem;
-  overflow: hidden;
+  border-radius: 0.3rem;
 }
 
 .form > * {
@@ -41,43 +45,110 @@ body {
 }
 
 .interact-btns {
-  max-height: 5rem;
-  left: 0;
-  bottom: 0;
+  display: flex;
   width: 100%;
-  position: absolute;
-  padding: 1rem;
-  display: inline-flex;
+  justify-content: flex-end;
   gap: 1rem;
 }
 
-.interact-btns > button {
-  width: 100%;
+.nav-btn {
+  width: 50%;
+  position: relative;
+  color: white;
+  border: none;
   padding: 1rem;
+  background: var(--accent-color);
+  font-weight: bold;
+  font: inherit;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 500ms ease;
+  border-radius: 0.3rem;
+}
+
+.nav-btn:hover {
+  transform: scale(1.05);
+}
+
+.input-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.3rem;
+}
+
+.input-container > input {
+  width: 100%;
+}
+
+.input-container > svg {
+  position: absolute;
+  
+}
+
+.togglePassword {
+  cursor: pointer;
+  margin-left: -25px;
+  top: 41%;
+  right: 5%;
+  transform: translate(0, -50%);
+}
+
+.fieldIcon {
+  top: 41%;
+  left: 5%;
+  transform: translate(0, -50%);
+}
+
+.passwordChecklist {
+  margin-bottom: 10px;
+}
+
+.inline-radio {
+  display: flex;
+  border-radius: 3px;
+  overflow: hidden;
+  outline: 1px solid #ccc;
+  font-size: 13px;
+  margin-bottom: 10px;
+  border-radius: 0.3rem;
+}
+
+.inline-radio > div {
+  position: relative;
+  flex: 1;
+  border-radius: 0.3rem;
+}
+
+.inline-radio > div > label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: rgb(117, 117, 117);
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  border-right: 1px solid #ccc;
+}
+
+.inline-radio > div > input {
+  width: 100%;
+  opacity: 0;
+  height: 35px;
   cursor: pointer;
 }
 
-fieldset {
-  position: relative;
-  display: flex;
-  height: 3rem;
-  overflow: hidden;
-  justify-content: space-around;
+.inline-radio > div:last-child label {
+  border-right: 0;
 }
 
-.passwordField {
-  position: relative;
-  overflow: hidden;
-}
-
-.passwordField > input {
-  width: 100%;
-}
-
-.passwordField > svg {
-  position: absolute;
-  top: 1px;
-  right: 10px;
+input[type="radio"]:checked + label {
+  background: var(--accent-color);
+  color: #fff;
+  transition: all ease 500ms;
 }
 
 /* utils */
@@ -91,6 +162,33 @@ li {
   list-style: none;
 }
 
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  padding: 15px;
+  padding-left: 3rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  width: 100%;
+  color: #2c3e50;
+  font-size: 13px;
+  transition: all 0.25s ease;
+}
+
+input[type="text"]:hover,
+input[type="password"]:hover,
+input[type="email"]:hover {
+  border: 1px solid var(--accent-color-semi-transparent);
+}
+
+input[type="text"]:focus-visible,
+input[type="password"]:focus-visible,
+input[type="email"]:focus-visible {
+  border: 1px solid var(--accent-color);
+  outline: none;
+}
+
 .error {
   color: red;
 }
@@ -99,7 +197,7 @@ li {
   color: limegreen;
 }
 
-.togglePassword {
-  cursor: pointer;
-  margin-left: -25px;
+.submitted {
+  text-align: center;
+  font-size: 1.5rem;
 }

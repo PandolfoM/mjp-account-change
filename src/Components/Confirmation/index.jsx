@@ -1,4 +1,11 @@
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
+import {
+  faEnvelope,
+  faLock,
+  faNetworkWired,
+  faSignature,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
@@ -7,48 +14,50 @@ function Confirmation(props) {
   const [passwordShown, setPasswordShown] = useState(false);
 
   return (
-    <form className="form" noValidate>
+    <form className="form" noValidate onSubmit={() => setPage(page + 1)}>
       <h2>Confirm Details</h2>
+      <br />
       <h3>{formData.type === "1" ? "Change Password" : "New Account"}</h3>
-      <input
-        type="text"
-        name="name"
-        defaultValue={formData.name}
-        placeholder="Name"></input>
+      <div className="input-container">
+        <FontAwesomeIcon icon={faSignature} className="fieldIcon" />
+        <input type="text" name="name" value={formData.name}></input>
+      </div>
 
-      <input
-        type="text"
-        name="network"
-        defaultValue={formData.network}
-        placeholder="Network Name"></input>
+      <div className="input-container">
+        <FontAwesomeIcon icon={faNetworkWired} className="fieldIcon" />
+        <input type="text" name="network" value={formData.network}></input>
+      </div>
 
-      <input
-        type="email"
-        name="email"
-        defaultValue={formData.email}
-        placeholder="Email"></input>
+      <div className="input-container">
+        <FontAwesomeIcon icon={faEnvelope} className="fieldIcon" />
+        <input type="email" name="email" value={formData.email}></input>
+      </div>
 
-      <input
-        type="text"
-        name="username"
-        defaultValue={formData.username}
-        placeholder="Username"></input>
+      <div className="input-container">
+        <FontAwesomeIcon icon={faUser} className="fieldIcon" />
+        <input type="text" name="username" value={formData.username}></input>
+      </div>
 
-      <div className="passwordField">
+      <div className="input-container">
+        <FontAwesomeIcon icon={faLock} className="fieldIcon" />
         <input
           type={passwordShown ? "text" : "password"}
           name="password"
-          defaultValue={formData.password}
-          placeholder="Password"></input>
+          value={formData.password}></input>
         <FontAwesomeIcon
           icon={passwordShown ? faEye : faEyeSlash}
           className="togglePassword"
           onClick={() => setPasswordShown(!passwordShown)}
         />
       </div>
+      
       <div className="interact-btns">
-        <button onClick={() => setPage(page - 1)}>Previous</button>
-        <button>Finish</button>
+        <button onClick={() => setPage(page - 1)} className="nav-btn">
+          Previous
+        </button>
+        <button type="submit" className="nav-btn">
+          Finish
+        </button>
       </div>
     </form>
   );
