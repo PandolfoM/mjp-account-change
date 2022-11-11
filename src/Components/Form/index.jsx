@@ -165,16 +165,19 @@ function Form(props) {
         </div>
       </div>
 
+      <div className="error-container">
+        {error && (
+          <h4 ref={errorTxt} className="error form-error">
+            {error}
+          </h4>
+        )}
+      </div>
+
       <div className="interact-btns">
         <button type="submit" className="nav-btn">
           Next
         </button>
       </div>
-      {error && (
-        <h4 ref={errorTxt} className="error form-error">
-          {error}
-        </h4>
-      )}
     </form>
   );
 }
