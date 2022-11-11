@@ -11,31 +11,83 @@ import { useState } from "react";
 
 function Confirmation(props) {
   const { formData, setFormData, page, setPage } = props;
+  const [status, setStatus] = useState("Finish");
   const [passwordShown, setPasswordShown] = useState(false);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("Sending...");
+    let formType;
+
+    if (formData.type === "1") {
+      formType = "Change Password";
+    } else {
+      formType = "New Account";
+    }
+
+    let details = {
+      name: formData.name,
+      network: formData.network,
+      email: formData.email,
+      username: formData.username,
+      password: formData.password,
+      form: formType,
+    };
+
+    try {
+      await fetch("http://localhost:5000/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify(details),
+      });
+    } catch (error) {
+      setStatus("Error");
+    }
+
+    setPage(page + 1);
+  };
+
   return (
-    <form className="form" noValidate onSubmit={() => setPage(page + 1)}>
+    <form className="form" noValidate onSubmit={handleSubmit}>
       <h2>Confirm Details</h2>
       <br />
       <h3>{formData.type === "1" ? "Change Password" : "New Account"}</h3>
       <div className="input-container">
         <FontAwesomeIcon icon={faSignature} className="fieldIcon" />
-        <input type="text" name="name" value={formData.name}></input>
+        <input
+          type="text"
+          name="name"
+          disabled
+          defaultValue={formData.name}></input>
       </div>
 
       <div className="input-container">
         <FontAwesomeIcon icon={faNetworkWired} className="fieldIcon" />
-        <input type="text" name="network" value={formData.network}></input>
+        <input
+          type="text"
+          name="network"
+          disabled
+          defaultValue={formData.network}></input>
       </div>
 
       <div className="input-container">
         <FontAwesomeIcon icon={faEnvelope} className="fieldIcon" />
-        <input type="email" name="email" value={formData.email}></input>
+        <input
+          type="email"
+          name="email"
+          disabled
+          defaultValue={formData.email}></input>
       </div>
 
       <div className="input-container">
         <FontAwesomeIcon icon={faUser} className="fieldIcon" />
-        <input type="text" name="username" value={formData.username}></input>
+        <input
+          type="text"
+          name="username"
+          disabled
+          defaultValue={formData.username}></input>
       </div>
 
       <div className="input-container">
@@ -43,20 +95,21 @@ function Confirmation(props) {
         <input
           type={passwordShown ? "text" : "password"}
           name="password"
-          value={formData.password}></input>
+          disabled
+          defaultValue={formData.password}></input>
         <FontAwesomeIcon
           icon={passwordShown ? faEye : faEyeSlash}
           className="togglePassword"
           onClick={() => setPasswordShown(!passwordShown)}
         />
       </div>
-      
+
       <div className="interact-btns">
         <button onClick={() => setPage(page - 1)} className="nav-btn">
           Previous
         </button>
         <button type="submit" className="nav-btn">
-          Finish
+          {status}
         </button>
       </div>
     </form>
