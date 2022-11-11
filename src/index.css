@@ -28,8 +28,6 @@ body {
 
 .container {
   padding: 1rem;
-  width: 50vw;
-  /* max-width: 100%; */
   position: absolute;
   top: 50%;
   left: 50%;
@@ -249,6 +247,7 @@ input[type="email"]:focus-visible {
 @media (min-width: 961px) {
   .container {
     width: 40vw;
+    max-width: 40rem;
   }
 }
 
