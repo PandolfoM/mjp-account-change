@@ -56,7 +56,11 @@ function Confirmation(props) {
       <h3>{formData.type === "1" ? "Change Password" : "New Account"}</h3>
       <div className="input-container">
         <FontAwesomeIcon icon={faSignature} className="fieldIcon" />
-        <input type="text" name="name" defaultValue={formData.name}></input>
+        <input
+          type="text"
+          name="name"
+          disabled
+          defaultValue={formData.name}></input>
       </div>
 
       <div className="input-container">
@@ -64,12 +68,17 @@ function Confirmation(props) {
         <input
           type="text"
           name="network"
+          disabled
           defaultValue={formData.network}></input>
       </div>
 
       <div className="input-container">
         <FontAwesomeIcon icon={faEnvelope} className="fieldIcon" />
-        <input type="email" name="email" defaultValue={formData.email}></input>
+        <input
+          type="email"
+          name="email"
+          disabled
+          defaultValue={formData.email}></input>
       </div>
 
       <div className="input-container">
@@ -77,6 +86,7 @@ function Confirmation(props) {
         <input
           type="text"
           name="username"
+          disabled
           defaultValue={formData.username}></input>
       </div>
 
@@ -85,6 +95,7 @@ function Confirmation(props) {
         <input
           type={passwordShown ? "text" : "password"}
           name="password"
+          disabled
           defaultValue={formData.password}></input>
         <FontAwesomeIcon
           icon={passwordShown ? faEye : faEyeSlash}
