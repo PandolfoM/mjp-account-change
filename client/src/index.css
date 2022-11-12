@@ -98,6 +98,13 @@ body {
 
 .passwordChecklist {
   margin-bottom: 10px;
+  font: inherit;
+  font-weight: bold;
+  text-indent: 1rem;
+}
+
+.passwordChecklist >li {
+  transition: all 200ms ease;
 }
 
 .inline-radio {
