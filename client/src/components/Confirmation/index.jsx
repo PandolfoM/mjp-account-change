@@ -17,6 +17,7 @@ function Confirmation(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("Sending...");
+
     let formType;
 
     if (formData.type === "1") {
@@ -34,15 +35,15 @@ function Confirmation(props) {
       form: formType,
     };
 
-    await fetch("http://localhost:5000/contact", {
+    await fetch("/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
       },
       body: JSON.stringify(details),
-    });
-
-    setPage(page + 1);
+    })
+      .then(setPage(page + 1))
+      .catch(setStatus("Error"));
   };
 
   return (
