@@ -1,6 +1,7 @@
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import {
   faEnvelope,
+  faLocationDot,
   faLock,
   faNetworkWired,
   faSignature,
@@ -99,6 +100,16 @@ function Confirmation(props) {
           className="togglePassword"
           onClick={() => setPasswordShown(!passwordShown)}
         />
+      </div>
+
+      <div className="input-container">
+        <FontAwesomeIcon icon={faLocationDot} className="fieldIcon" />
+        <input
+          type="text"
+          name="sites"
+          defaultValue={formData.allSites ? "All Sites" : formData.sites}
+          disabled
+          placeholder="Sites"></input>
       </div>
 
       <div className="interact-btns">

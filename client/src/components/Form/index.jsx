@@ -70,6 +70,7 @@ function Form(props) {
       noValidate
       onChange={handleChange}
       onSubmit={validateInfo}>
+      <h3>{formData.type === "1" ? "Change Password" : "New Account"}</h3>
       <div className="input-container">
         <FontAwesomeIcon icon={faSignature} className="fieldIcon" />
         <input
@@ -142,29 +143,6 @@ function Form(props) {
         <li className={match ? "success" : "error"}>Passwords Match</li>
       </ul>
 
-      {/* New user or change password */}
-      {/* <label>Type</label> */}
-      <div className="inline-radio">
-        <div>
-          <input
-            type="radio"
-            id="changepass"
-            name="type"
-            value="1"
-            defaultChecked={formData.type === "1"}></input>
-          <label htmlFor="changepass">Change Password</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            id="newpass"
-            name="type"
-            value="2"
-            defaultChecked={formData.type === "2"}></input>
-          <label htmlFor="newpass">New Account</label>
-        </div>
-      </div>
-
       <div className="error-container">
         {error && (
           <h4 ref={errorTxt} className="error form-error">
@@ -174,6 +152,9 @@ function Form(props) {
       </div>
 
       <div className="interact-btns">
+        <button onClick={() => setPage(page - 1)} className="nav-btn">
+          Previous
+        </button>
         <button type="submit" className="nav-btn">
           Next
         </button>
