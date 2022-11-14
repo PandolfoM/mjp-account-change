@@ -22,6 +22,8 @@ function AccountType(props) {
 
   return (
     <form className="form" noValidate onChange={handleChange}>
+      <h2>Select Account Type</h2>
+      <br />
       <div className="inline-radio">
         <div>
           <input
