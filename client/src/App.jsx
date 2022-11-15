@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AccountType from "./components/AccountType";
 import Confirmation from "./components/Confirmation";
 import Form from "./components/Form";
 import Success from "./components/Success";
@@ -14,9 +15,19 @@ function App() {
     password: "",
     passwordConfirm: "",
     email: "",
+    allSites: true,
   });
+  const [site, addSite] = useState([{ site: "" }]);
 
   const componentList = [
+    <AccountType
+      formData={formData}
+      setFormData={setFormData}
+      page={page}
+      setPage={setPage}
+      site={site}
+      addSite={addSite}
+    />,
     <Form
       formData={formData}
       setFormData={setFormData}
@@ -25,9 +36,9 @@ function App() {
     />,
     <Confirmation
       formData={formData}
-      setFormData={setFormData}
       page={page}
       setPage={setPage}
+      site={site}
     />,
     <Success />,
   ];

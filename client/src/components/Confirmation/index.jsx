@@ -1,6 +1,7 @@
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import {
   faEnvelope,
+  faLocationDot,
   faLock,
   faNetworkWired,
   faSignature,
@@ -10,9 +11,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
 function Confirmation(props) {
-  const { formData, setFormData, page, setPage } = props;
-  const [status, setStatus] = useState("Finish");
+  const { formData, page, setPage, site } = props;
+  const [status, setStatus] = useState("Send");
   const [passwordShown, setPasswordShown] = useState(false);
+
+  let displaySites = [];
+  site.map((item, i) => {
+    displaySites.push(item.site);
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,17 +39,22 @@ function Confirmation(props) {
       username: formData.username,
       password: formData.password,
       form: formType,
+      sites: formData.allSites ? "All Sites" : displaySites.join(", "),
     };
 
-    await fetch("/contact", {
+    const response = await fetch("/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
       },
       body: JSON.stringify(details),
-    })
-      .then(setPage(page + 1))
-      .catch(setStatus("Error"));
+    });
+    const sent = await response.json();
+    if (sent === "error") {
+      setStatus("Error!");
+    } else {
+      setPage(page + 1);
+    }
   };
 
   return (
@@ -52,10 +63,20 @@ function Confirmation(props) {
       <br />
       <h3>{formData.type === "1" ? "Change Password" : "New Account"}</h3>
       <div className="input-container">
+        <FontAwesomeIcon icon={faLocationDot} className="fieldIcon" />
+        <input
+          type="text"
+          defaultValue={
+            formData.allSites ? "All Sites" : displaySites.join(", ")
+          }
+          disabled
+          placeholder="Sites"></input>
+      </div>
+
+      <div className="input-container">
         <FontAwesomeIcon icon={faSignature} className="fieldIcon" />
         <input
           type="text"
-          name="name"
           disabled
           defaultValue={formData.name}></input>
       </div>
@@ -64,7 +85,6 @@ function Confirmation(props) {
         <FontAwesomeIcon icon={faNetworkWired} className="fieldIcon" />
         <input
           type="text"
-          name="network"
           disabled
           defaultValue={formData.network}></input>
       </div>
@@ -73,7 +93,6 @@ function Confirmation(props) {
         <FontAwesomeIcon icon={faEnvelope} className="fieldIcon" />
         <input
           type="email"
-          name="email"
           disabled
           defaultValue={formData.email}></input>
       </div>
@@ -82,7 +101,6 @@ function Confirmation(props) {
         <FontAwesomeIcon icon={faUser} className="fieldIcon" />
         <input
           type="text"
-          name="username"
           disabled
           defaultValue={formData.username}></input>
       </div>
@@ -91,12 +109,11 @@ function Confirmation(props) {
         <FontAwesomeIcon icon={faLock} className="fieldIcon" />
         <input
           type={passwordShown ? "text" : "password"}
-          name="password"
           disabled
           defaultValue={formData.password}></input>
         <FontAwesomeIcon
           icon={passwordShown ? faEye : faEyeSlash}
-          className="togglePassword"
+          className="end-icon"
           onClick={() => setPasswordShown(!passwordShown)}
         />
       </div>
