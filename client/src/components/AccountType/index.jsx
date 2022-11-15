@@ -20,19 +20,12 @@ function AccountType(props) {
   }, [error]);
 
   const handleChange = (e) => {
-    const { name, value, checked } = e.target;
+    const { name, value } = e.target;
 
-    if (name === "allSites") {
-      setFormData({
-        ...formData,
-        [name]: checked,
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   const handleFormChange = (item, e) => {
@@ -57,7 +50,7 @@ function AccountType(props) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    if (formData.allSites) return setPage(page + 1);
+    if (formData.allSites === "1") return setPage(page + 1);
 
     site.map((item, i) => {
       if (!item.site) {
@@ -80,7 +73,7 @@ function AccountType(props) {
             name="type"
             value="1"
             defaultChecked={formData.type === "1"}></input>
-          <label htmlFor="changepass">Change Password</label>
+          <label htmlFor="changepass">Update Password</label>
         </div>
         <div>
           <input
@@ -94,12 +87,26 @@ function AccountType(props) {
       </div>
       {formData.type === "2" && (
         <div className="sites">
-          <input
-            type="checkbox"
-            name="allSites"
-            id="allSites"
-            defaultChecked={formData.allSites}></input>
-          <label htmlFor="allSites">All Sites</label>
+          <div className="inline-radio">
+            <div>
+              <input
+                type="radio"
+                id="all-sites"
+                name="allSites"
+                value="1"
+                defaultChecked={formData.allSites === "1"}></input>
+              <label htmlFor="all-sites">All Sites</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="pcNumbers"
+                name="allSites"
+                value="2"
+                defaultChecked={formData.allSites === "2"}></input>
+              <label htmlFor="pcNumbers">PC Numbers</label>
+            </div>
+          </div>
           <div className="sites-input">
             {site.map((item, i) => (
               <div key={i}>
@@ -109,10 +116,10 @@ function AccountType(props) {
                     type="text"
                     name="site"
                     defaultValue={item.site}
-                    disabled={formData.allSites}
+                    disabled={formData.allSites === "1"}
                     placeholder="Site"
                     onChange={(e) => handleFormChange(i, e)}></input>
-                  {formData.allSites !== true && (
+                  {formData.allSites === "2" && (
                     <FontAwesomeIcon
                       icon={faTrash}
                       className="end-icon delete-site"
@@ -123,7 +130,7 @@ function AccountType(props) {
               </div>
             ))}
           </div>
-          <button disabled={formData.allSites} onClick={addField}>
+          <button disabled={formData.allSites === "1"} onClick={addField}>
             Add +
           </button>
         </div>
