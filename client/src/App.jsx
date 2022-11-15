@@ -15,7 +15,7 @@ function App() {
     password: "",
     passwordConfirm: "",
     email: "",
-    allSites: true,
+    allSites: "1",
   });
   const [site, addSite] = useState([{ site: "" }]);
 

@@ -1,4 +1,8 @@
-import { faLocationDot, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faLocationDot,
+  faPlus,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef } from "react";
 import { useEffect } from "react";
@@ -20,24 +24,18 @@ function AccountType(props) {
   }, [error]);
 
   const handleChange = (e) => {
-    const { name, value, checked } = e.target;
+    const { name, value } = e.target;
 
-    if (name === "allSites") {
-      setFormData({
-        ...formData,
-        [name]: checked,
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   const handleFormChange = (item, e) => {
+    const limit = 6;
     let data = [...site];
-    data[item][e.target.name] = e.target.value;
+    data[item][e.target.name] = e.target.value.slice(0, limit);
     addSite(data);
   };
 
@@ -57,15 +55,28 @@ function AccountType(props) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    if (formData.allSites) return setPage(page + 1);
+    if (formData.allSites === "1") return setPage(page + 1);
 
-    site.map((item, i) => {
-      if (!item.site) {
-        setError("Site(s) left blank, please fill in or remove");
-      } else if (item.site && !formData.allSites) {
-        setPage(page + 1);
-      }
-    });
+    setPage(page + 1);
+
+    // for (let i = 0; i < site.length; i++) {
+    //   // console.log(site[i].site.length === 0);
+    //   if (site[i].site.length === 0) {
+    //     return setError("Site(s) left blank, please fill in or remove");
+    //   } else if (site[i].site.length >= 1) {
+    //     console.log('no err');
+    //   }
+    // }
+
+    // site.map((item, i) => {
+    //   // console.log(!item.site);
+    //   if (item.site.length === 0) {
+    //    return setError("Site(s) left blank, please fill in or remove");
+    //   } else if (item.site && formData.allSites === "2" ) {
+    //     // setPage(page + 1);
+    //     console.log('no err');
+    //   }
+    // });
   };
 
   return (
@@ -80,7 +91,7 @@ function AccountType(props) {
             name="type"
             value="1"
             defaultChecked={formData.type === "1"}></input>
-          <label htmlFor="changepass">Change Password</label>
+          <label htmlFor="changepass">Update Password</label>
         </div>
         <div>
           <input
@@ -94,38 +105,61 @@ function AccountType(props) {
       </div>
       {formData.type === "2" && (
         <div className="sites">
-          <input
-            type="checkbox"
-            name="allSites"
-            id="allSites"
-            defaultChecked={formData.allSites}></input>
-          <label htmlFor="allSites">All Sites</label>
-          <div className="sites-input">
-            {site.map((item, i) => (
-              <div key={i}>
-                <div className="input-container ">
-                  <FontAwesomeIcon icon={faLocationDot} className="fieldIcon" />
-                  <input
-                    type="text"
-                    name="site"
-                    defaultValue={item.site}
-                    disabled={formData.allSites}
-                    placeholder="Site"
-                    onChange={(e) => handleFormChange(i, e)}></input>
-                  {formData.allSites !== true && (
+          <div className="inline-radio">
+            <div>
+              <input
+                type="radio"
+                id="all-sites"
+                name="allSites"
+                value="1"
+                defaultChecked={formData.allSites === "1"}></input>
+              <label htmlFor="all-sites">All Sites</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="pcNumbers"
+                name="allSites"
+                value="2"
+                defaultChecked={formData.allSites === "2"}></input>
+              <label htmlFor="pcNumbers">PC Numbers</label>
+            </div>
+          </div>
+          {formData.allSites === "2" && (
+            <div className="sites-input">
+              {site.map((item, i) => (
+                <div key={i}>
+                  <div className="input-container ">
+                    <FontAwesomeIcon
+                      icon={faLocationDot}
+                      className="fieldIcon"
+                    />
+                    <input
+                      type="number"
+                      name="site"
+                      value={item.site}
+                      disabled={formData.allSites === "1"}
+                      placeholder="PC Number (Max 6 Digits)"
+                      onChange={(e) => handleFormChange(i, e)}
+                      required></input>
                     <FontAwesomeIcon
                       icon={faTrash}
                       className="end-icon delete-site"
                       onClick={(e) => removeField(i, e)}
                     />
-                  )}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-          <button disabled={formData.allSites} onClick={addField}>
-            Add +
-          </button>
+              ))}
+            </div>
+          )}
+          {formData.allSites === "2" && (
+            <button
+              disabled={formData.allSites === "1"}
+              onClick={addField}
+              className="addPC">
+              Add PC <FontAwesomeIcon icon={faPlus} />
+            </button>
+          )}
         </div>
       )}
       <div className="error-container">
