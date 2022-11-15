@@ -104,63 +104,64 @@ function AccountType(props) {
         </div>
       </div>
       {formData.type === "2" && (
-        <div className="sites">
-          <div className="inline-radio">
-            <div>
-              <input
-                type="radio"
-                id="all-sites"
-                name="allSites"
-                value="1"
-                defaultChecked={formData.allSites === "1"}></input>
-              <label htmlFor="all-sites">All Sites</label>
+        <>
+          <h5 className="prompt">Will the user need access to all sites or specific sites?</h5>
+          <div className="sites">
+            <div className="inline-radio">
+              <div>
+                <input
+                  type="radio"
+                  id="all-sites"
+                  name="allSites"
+                  value="1"></input>
+                <label htmlFor="all-sites">All Sites</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="pcNumbers"
+                  name="allSites"
+                  value="2"></input>
+                <label htmlFor="pcNumbers">PC Numbers</label>
+              </div>
             </div>
-            <div>
-              <input
-                type="radio"
-                id="pcNumbers"
-                name="allSites"
-                value="2"
-                defaultChecked={formData.allSites === "2"}></input>
-              <label htmlFor="pcNumbers">PC Numbers</label>
-            </div>
-          </div>
-          {formData.allSites === "2" && (
-            <div className="sites-input">
-              {site.map((item, i) => (
-                <div key={i}>
-                  <div className="input-container ">
-                    <FontAwesomeIcon
-                      icon={faLocationDot}
-                      className="fieldIcon"
-                    />
-                    <input
-                      type="number"
-                      name="site"
-                      value={item.site}
-                      disabled={formData.allSites === "1"}
-                      placeholder="PC Number (Max 6 Digits)"
-                      onChange={(e) => handleFormChange(i, e)}
-                      required></input>
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      className="end-icon delete-site"
-                      onClick={(e) => removeField(i, e)}
-                    />
+            {formData.allSites === "2" && (
+              <div className="sites-input">
+                {site.map((item, i) => (
+                  <div key={i}>
+                    <div className="input-container ">
+                      <FontAwesomeIcon
+                        icon={faLocationDot}
+                        className="fieldIcon"
+                      />
+                      <input
+                        type="number"
+                        name="site"
+                        value={item.site}
+                        disabled={formData.allSites === "1"}
+                        placeholder="PC Number (Max 6 Digits)"
+                        onChange={(e) => handleFormChange(i, e)}
+                        required></input>
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        className="end-icon delete-site"
+                        onClick={(e) => removeField(i, e)}
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
-          {formData.allSites === "2" && (
-            <button
-              disabled={formData.allSites === "1"}
-              onClick={addField}
-              className="addPC">
-              Add PC <FontAwesomeIcon icon={faPlus} />
-            </button>
-          )}
-        </div>
+                ))}
+              </div>
+            )}
+            {formData.allSites === "2" && (
+              <button
+                disabled={formData.allSites === "1"}
+                onClick={addField}
+                className="addPC">
+                Add PC <FontAwesomeIcon icon={faPlus} />
+              </button>
+            )}
+          </div>
+        </>
       )}
       <div className="error-container">
         {error && (
