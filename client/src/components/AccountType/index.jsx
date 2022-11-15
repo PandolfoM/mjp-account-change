@@ -54,7 +54,7 @@ function AccountType(props) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (formData.allSites === "0") return setError("User sites not chosen");
+    if (formData.allSites === "0" && formData.type !== "1") return setError("User sites not chosen");
     setPage(page + 1);
   };
 
