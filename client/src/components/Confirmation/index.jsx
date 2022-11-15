@@ -44,7 +44,7 @@ function Confirmation(props) {
       username: formData.username,
       password: formData.password,
       form: formType,
-      sites: formData.allSites ? "All Sites" : displaySites.join(", "),
+      sites: formData.allSites === "1" ? "All Sites" : filtered.join(", "),
     };
 
     const response = await fetch("/contact", {
