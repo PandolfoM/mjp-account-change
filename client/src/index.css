@@ -179,6 +179,21 @@ body {
   width: fit-content;
 }
 
+.addPC {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0.5rem;
+  border: 0;
+  background-color: var(--accent-color);
+  color: white;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  transition: all 500ms ease;
+}
+
 .delete-site {
   transition: color 100ms linear;
   animation: none;

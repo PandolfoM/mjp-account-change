@@ -1,4 +1,8 @@
-import { faLocationDot, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faLocationDot,
+  faPlus,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef } from "react";
 import { useEffect } from "react";
@@ -50,11 +54,11 @@ function AccountType(props) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    
+
     if (formData.allSites === "1") return setPage(page + 1);
-    
-    setPage(page + 1)
-    
+
+    setPage(page + 1);
+
     // for (let i = 0; i < site.length; i++) {
     //   // console.log(site[i].site.length === 0);
     //   if (site[i].site.length === 0) {
@@ -121,33 +125,41 @@ function AccountType(props) {
               <label htmlFor="pcNumbers">PC Numbers</label>
             </div>
           </div>
-          <div className="sites-input">
-            {site.map((item, i) => (
-              <div key={i}>
-                <div className="input-container ">
-                  <FontAwesomeIcon icon={faLocationDot} className="fieldIcon" />
-                  <input
-                    type="number"
-                    name="site"
-                    value={item.site}
-                    disabled={formData.allSites === "1"}
-                    placeholder="PC Number (Max 6 Digits)"
-                    onChange={(e) => handleFormChange(i, e)}
-                    required></input>
-                  {formData.allSites === "2" && (
+          {formData.allSites === "2" && (
+            <div className="sites-input">
+              {site.map((item, i) => (
+                <div key={i}>
+                  <div className="input-container ">
+                    <FontAwesomeIcon
+                      icon={faLocationDot}
+                      className="fieldIcon"
+                    />
+                    <input
+                      type="number"
+                      name="site"
+                      value={item.site}
+                      disabled={formData.allSites === "1"}
+                      placeholder="PC Number (Max 6 Digits)"
+                      onChange={(e) => handleFormChange(i, e)}
+                      required></input>
                     <FontAwesomeIcon
                       icon={faTrash}
                       className="end-icon delete-site"
                       onClick={(e) => removeField(i, e)}
                     />
-                  )}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-          <button disabled={formData.allSites === "1"} onClick={addField}>
-            Add +
-          </button>
+              ))}
+            </div>
+          )}
+          {formData.allSites === "2" && (
+            <button
+              disabled={formData.allSites === "1"}
+              onClick={addField}
+              className="addPC">
+              Add PC <FontAwesomeIcon icon={faPlus} />
+            </button>
+          )}
         </div>
       )}
       <div className="error-container">
