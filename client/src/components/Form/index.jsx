@@ -118,7 +118,7 @@ function Form(props) {
           placeholder="Password"></input>
         <FontAwesomeIcon
           icon={passwordShown ? faEye : faEyeSlash}
-          className="togglePassword"
+          className="end-icon"
           onClick={() => setPasswordShown(!passwordShown)}
         />
       </div>
@@ -132,7 +132,7 @@ function Form(props) {
           placeholder="Confirm Password"></input>
         <FontAwesomeIcon
           icon={passwordShown ? faEye : faEyeSlash}
-          className="togglePassword"
+          className="end-icon"
           onClick={() => setPasswordShown(!passwordShown)}
         />
       </div>

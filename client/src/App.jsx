@@ -16,8 +16,8 @@ function App() {
     passwordConfirm: "",
     email: "",
     allSites: true,
-    sites: "",
   });
+  const [site, addSite] = useState([{ site: "" }]);
 
   const componentList = [
     <AccountType
@@ -25,6 +25,8 @@ function App() {
       setFormData={setFormData}
       page={page}
       setPage={setPage}
+      site={site}
+      addSite={addSite}
     />,
     <Form
       formData={formData}
@@ -34,9 +36,9 @@ function App() {
     />,
     <Confirmation
       formData={formData}
-      setFormData={setFormData}
       page={page}
       setPage={setPage}
+      site={site}
     />,
     <Success />,
   ];

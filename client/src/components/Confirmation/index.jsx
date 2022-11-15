@@ -11,9 +11,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
 function Confirmation(props) {
-  const { formData, setFormData, page, setPage } = props;
+  const { formData, page, setPage, site } = props;
   const [status, setStatus] = useState("Finish");
   const [passwordShown, setPasswordShown] = useState(false);
+
+  let displaySites = []
+  site.map((item, i) => {
+    displaySites.push(item.site)
+  })
+
+  console.log(displaySites);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,6 +59,16 @@ function Confirmation(props) {
       <h2>Confirm Details</h2>
       <br />
       <h3>{formData.type === "1" ? "Change Password" : "New Account"}</h3>
+      <div className="input-container">
+        <FontAwesomeIcon icon={faLocationDot} className="fieldIcon" />
+        <input
+          type="text"
+          name="sites"
+          defaultValue={formData.allSites ? "All Sites" : displaySites.join(', ')}
+          disabled
+          placeholder="Sites"></input>
+      </div>
+
       <div className="input-container">
         <FontAwesomeIcon icon={faSignature} className="fieldIcon" />
         <input
@@ -97,19 +114,9 @@ function Confirmation(props) {
           defaultValue={formData.password}></input>
         <FontAwesomeIcon
           icon={passwordShown ? faEye : faEyeSlash}
-          className="togglePassword"
+          className="end-icon"
           onClick={() => setPasswordShown(!passwordShown)}
         />
-      </div>
-
-      <div className="input-container">
-        <FontAwesomeIcon icon={faLocationDot} className="fieldIcon" />
-        <input
-          type="text"
-          name="sites"
-          defaultValue={formData.allSites ? "All Sites" : formData.sites}
-          disabled
-          placeholder="Sites"></input>
       </div>
 
       <div className="interact-btns">
