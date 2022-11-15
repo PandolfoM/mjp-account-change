@@ -65,7 +65,6 @@ function Confirmation(props) {
   return (
     <form className="form" noValidate onSubmit={handleSubmit}>
       <h2>Confirm Details</h2>
-      <br />
       <h3>{formData.type === "1" ? "Change Password" : "New Account"}</h3>
       <div className="input-container">
         <FontAwesomeIcon icon={faLocationDot} className="fieldIcon" />

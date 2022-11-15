@@ -70,7 +70,6 @@ function Form(props) {
       onChange={handleChange}
       onSubmit={validateInfo}>
       <h2>Input Details</h2>
-      <br />
       <h3>{formData.type === "1" ? "Change Password" : "New Account"}</h3>
       <div className="input-container">
         <FontAwesomeIcon icon={faSignature} className="fieldIcon" />
