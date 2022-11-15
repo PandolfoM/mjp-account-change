@@ -259,6 +259,7 @@ li {
 }
 
 input[type="text"],
+input[type="number"],
 input[type="password"],
 input[type="email"] {
   padding: 15px;
@@ -273,16 +274,23 @@ input[type="email"] {
 }
 
 input[type="text"]:hover,
+input[type="number"]:hover,
 input[type="password"]:hover,
 input[type="email"]:hover {
   border: 1px solid var(--accent-color-semi-transparent);
 }
 
 input[type="text"]:focus-visible,
+input[type="number"]:focus-visible,
 input[type="password"]:focus-visible,
 input[type="email"]:focus-visible {
   border: 1px solid var(--accent-color);
   outline: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button, 
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
 
 .error {

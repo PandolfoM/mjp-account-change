@@ -16,9 +16,14 @@ function Confirmation(props) {
   const [passwordShown, setPasswordShown] = useState(false);
 
   let displaySites = [];
+  
   site.map((item, i) => {
     displaySites.push(item.site);
   });
+
+  let filtered = displaySites.filter(function(el) {
+    return el != ""
+  })
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,7 +72,7 @@ function Confirmation(props) {
         <input
           type="text"
           defaultValue={
-            formData.allSites ? "All Sites" : displaySites.join(", ")
+            formData.allSites === "1" ? "All Sites" : filtered.join(", ")
           }
           disabled
           placeholder="Sites"></input>

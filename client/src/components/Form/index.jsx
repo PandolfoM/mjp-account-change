@@ -67,7 +67,6 @@ function Form(props) {
   return (
     <form
       className="form"
-      noValidate
       onChange={handleChange}
       onSubmit={validateInfo}>
       <h2>Input Details</h2>
@@ -78,6 +77,7 @@ function Form(props) {
         <input
           type="text"
           name="name"
+          required
           defaultValue={formData.name}
           placeholder="Name"></input>
       </div>
@@ -87,6 +87,7 @@ function Form(props) {
         <input
           type="text"
           name="network"
+          required
           defaultValue={formData.network}
           placeholder="Network Name"></input>
       </div>
@@ -94,7 +95,7 @@ function Form(props) {
       <div className="input-container">
         <FontAwesomeIcon icon={faEnvelope} className="fieldIcon" />
         <input
-          type="email"
+          type="text"
           name="email"
           defaultValue={formData.email}
           placeholder="Email"></input>
@@ -105,6 +106,7 @@ function Form(props) {
         <input
           type="text"
           name="username"
+          required
           defaultValue={formData.username}
           placeholder="Username"></input>
       </div>

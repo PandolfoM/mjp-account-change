@@ -29,8 +29,9 @@ function AccountType(props) {
   };
 
   const handleFormChange = (item, e) => {
+    const limit = 6;
     let data = [...site];
-    data[item][e.target.name] = e.target.value;
+    data[item][e.target.name] = e.target.value.slice(0, limit);
     addSite(data);
   };
 
@@ -49,16 +50,29 @@ function AccountType(props) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-
+    
     if (formData.allSites === "1") return setPage(page + 1);
+    
+    setPage(page + 1)
+    
+    // for (let i = 0; i < site.length; i++) {
+    //   // console.log(site[i].site.length === 0);
+    //   if (site[i].site.length === 0) {
+    //     return setError("Site(s) left blank, please fill in or remove");
+    //   } else if (site[i].site.length >= 1) {
+    //     console.log('no err');
+    //   }
+    // }
 
-    site.map((item, i) => {
-      if (!item.site) {
-        setError("Site(s) left blank, please fill in or remove");
-      } else if (item.site && !formData.allSites) {
-        setPage(page + 1);
-      }
-    });
+    // site.map((item, i) => {
+    //   // console.log(!item.site);
+    //   if (item.site.length === 0) {
+    //    return setError("Site(s) left blank, please fill in or remove");
+    //   } else if (item.site && formData.allSites === "2" ) {
+    //     // setPage(page + 1);
+    //     console.log('no err');
+    //   }
+    // });
   };
 
   return (
@@ -113,12 +127,13 @@ function AccountType(props) {
                 <div className="input-container ">
                   <FontAwesomeIcon icon={faLocationDot} className="fieldIcon" />
                   <input
-                    type="text"
+                    type="number"
                     name="site"
-                    defaultValue={item.site}
+                    value={item.site}
                     disabled={formData.allSites === "1"}
-                    placeholder="Site"
-                    onChange={(e) => handleFormChange(i, e)}></input>
+                    placeholder="PC Number (Max 6 Digits)"
+                    onChange={(e) => handleFormChange(i, e)}
+                    required></input>
                   {formData.allSites === "2" && (
                     <FontAwesomeIcon
                       icon={faTrash}
