@@ -61,6 +61,7 @@ function AccountType(props) {
   return (
     <form className="form" noValidate onChange={handleChange}>
       <h2>Select Account Type</h2>
+      <h4>Do you need to update a password or create a new user?</h4>
       <div className="inline-radio">
         <div>
           <input
@@ -78,7 +79,7 @@ function AccountType(props) {
             name="type"
             value="2"
             defaultChecked={formData.type === "2"}></input>
-          <label htmlFor="newpass">New Account</label>
+          <label htmlFor="newpass">New User</label>
         </div>
       </div>
       {formData.type === "2" && (
