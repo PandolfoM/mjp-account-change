@@ -4,7 +4,7 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Box, Button, Flex, keyframes } from "@mantine/core";
+import { Box, Button, Flex, keyframes, Title } from "@mantine/core";
 
 function AccountType(props) {
   const { formData, setFormData, page, setPage, site, addSite } = props;
@@ -47,7 +47,8 @@ function AccountType(props) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (formData.allSites === "0" && formData.type !== "1") return setError("User sites not chosen");
+    if (formData.allSites === "0" && formData.type !== "1")
+      return setError("User sites not chosen");
     setPage(page + 1);
   };
 
@@ -57,8 +58,12 @@ function AccountType(props) {
       sx={{ display: "flex", flexDirection: "column", gap: "5px" }}
       noValidate
       onChange={handleChange}>
-      <h2>Select Account Type</h2>
-      <br />
+      <Title order={2} ff={"Poppins"} fz={"1.4rem"}>
+        Select Account Type
+      </Title>
+      <Title order={4} ff={"Poppins"} fz={"1rem"} fw="500">
+        Do you need to update a password or create a new user?
+      </Title>
       <Flex
         fz={"13px"}
         mb="10px"
@@ -135,167 +140,174 @@ function AccountType(props) {
         </Box>
       </Flex>
       {formData.type === "2" && (
-        <Flex
-          direction={"column"}
-          gap="5px"
-          justify={"center"}
-          sx={{ flex: 1 }}>
+        <>
+          <Title order={4} ff={"Poppins"} fz={"1rem"} fw="500">
+            Will the user need access to all sites or specific sites?
+          </Title>
           <Flex
-            fz={"13px"}
-            mb="10px"
-            sx={{
-              borderRadius: "0.3rem",
-              overflow: "hidden",
-              outline: "1px solid #ccc",
-            }}>
-            <Box sx={{ position: "relative", flex: 1, borderRadius: "0.3rem" }}>
-              <Box
-                sx={{
-                  width: "100%",
-                  opacity: "0",
-                  height: "35px",
-                }}
-                component="input"
-                type="radio"
-                id="all-sites"
-                name="allSites"
-                value="1"
-                defaultChecked={formData.allSites === "1"}></Box>
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: "0",
-                  left: "0",
-                  color: "rgb(117, 117, 117)",
-                  width: "100%",
-                  height: "100%",
-                  background: "white",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRight: "0px",
-                  cursor: "pointer",
-                }}
-                component="label"
-                htmlFor="all-sites">
-                All Sites
-              </Box>
-            </Box>
-            <Box sx={{ position: "relative", flex: 1, borderRadius: "0.3rem" }}>
-              <Box
-                sx={{
-                  width: "100%",
-                  opacity: "0",
-                  height: "35px",
-                }}
-                component="input"
-                type="radio"
-                id="pcNumbers"
-                name="allSites"
-                value="2"
-                defaultChecked={formData.allSites === "2"}></Box>
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: "0",
-                  left: "0",
-                  color: "rgb(117, 117, 117)",
-                  width: "100%",
-                  height: "100%",
-                  background: "white",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRight: "0px",
-                  cursor: "pointer",
-                }}
-                component="label"
-                htmlFor="pcNumbers">
-                PC Numbers
-              </Box>
-            </Box>
-          </Flex>
-          {formData.allSites === "2" && (
-            <Box
+            direction={"column"}
+            gap="5px"
+            justify={"center"}
+            sx={{ flex: 1 }}>
+            <Flex
+              fz={"13px"}
+              mb="10px"
               sx={{
-                maxHeight: "25rem",
-                overflowY: "auto",
-                display: "inherit",
-                flexDirection: "inherit",
-                gap: "inherit",
-              }}>
-              {site.map((item, i) => (
-                <div key={i}>
-                  <Box
-                    sx={{
-                      position: "relative",
-                      overflow: "hidden",
-                      borderRadius: "0.3rem",
-                    }}>
-                    <FontAwesomeIcon
-                      icon={faLocationDot}
-                      style={{
-                        position: "absolute",
-                        top: "50%",
-                        left: "1rem",
-                        transform: "translate(0, -50%)",
-                      }}
-                    />
-                    <Box
-                      sx={{ width: "100%" }}
-                      component="input"
-                      type="number"
-                      name="site"
-                      value={item.site}
-                      disabled={formData.allSites === "1"}
-                      placeholder="PC Number"
-                      onChange={(e) => handleFormChange(i, e)}
-                      required></Box>
-                    <Box
-                      component={FontAwesomeIcon}
-                      icon={faTrash}
-                      sx={{
-                        position: "absolute",
-                        cursor: "pointer",
-                        marginLeft: "-25px",
-                        top: "50%",
-                        right: "1rem",
-                        transform: "translate(0, -50%)",
-                        transition: "color 100ms linear",
-                        animation: "none",
-                        "&:hover": {
-                          color: "red",
-                          animation: `${wiggle} 1000ms linear`,
-                        },
-                      }}
-                      onClick={(e) => removeField(i, e)}
-                    />
-                  </Box>
-                </div>
-              ))}
-            </Box>
-          )}
-          {formData.allSites === "2" && (
-            <Button
-              disabled={formData.allSites === "1"}
-              onClick={addField}
-              sx={(theme) => ({
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "5px",
-                padding: "0.5rem",
-                border: "0px",
-                backgroundColor: theme.colors.accent[0],
-                font: "inherit",
-                color: "white",
                 borderRadius: "0.3rem",
-                "&:hover": { background: theme.colors.accent[0] },
-              })}>
-              Add PC <FontAwesomeIcon icon={faPlus} />
-            </Button>
-          )}
-        </Flex>
+                overflow: "hidden",
+                outline: "1px solid #ccc",
+              }}>
+              <Box
+                sx={{ position: "relative", flex: 1, borderRadius: "0.3rem" }}>
+                <Box
+                  sx={{
+                    width: "100%",
+                    opacity: "0",
+                    height: "35px",
+                  }}
+                  component="input"
+                  type="radio"
+                  id="all-sites"
+                  name="allSites"
+                  value="1"
+                  defaultChecked={formData.allSites === "1"}></Box>
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: "0",
+                    left: "0",
+                    color: "rgb(117, 117, 117)",
+                    width: "100%",
+                    height: "100%",
+                    background: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderRight: "1px solid #ccc",
+                    cursor: "pointer",
+                  }}
+                  component="label"
+                  htmlFor="all-sites">
+                  All Sites
+                </Box>
+              </Box>
+              <Box
+                sx={{ position: "relative", flex: 1, borderRadius: "0.3rem" }}>
+                <Box
+                  sx={{
+                    width: "100%",
+                    opacity: "0",
+                    height: "35px",
+                  }}
+                  component="input"
+                  type="radio"
+                  id="pcNumbers"
+                  name="allSites"
+                  value="2"
+                  defaultChecked={formData.allSites === "2"}></Box>
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: "0",
+                    left: "0",
+                    color: "rgb(117, 117, 117)",
+                    width: "100%",
+                    height: "100%",
+                    background: "white",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderRight: "0px",
+                    cursor: "pointer",
+                  }}
+                  component="label"
+                  htmlFor="pcNumbers">
+                  PC Numbers
+                </Box>
+              </Box>
+            </Flex>
+            {formData.allSites === "2" && (
+              <Box
+                sx={{
+                  maxHeight: "25rem",
+                  overflowY: "auto",
+                  display: "inherit",
+                  flexDirection: "inherit",
+                  gap: "inherit",
+                }}>
+                {site.map((item, i) => (
+                  <div key={i}>
+                    <Box
+                      sx={{
+                        position: "relative",
+                        overflow: "hidden",
+                        borderRadius: "0.3rem",
+                      }}>
+                      <FontAwesomeIcon
+                        icon={faLocationDot}
+                        style={{
+                          position: "absolute",
+                          top: "50%",
+                          left: "1rem",
+                          transform: "translate(0, -50%)",
+                        }}
+                      />
+                      <Box
+                        sx={{ width: "100%" }}
+                        component="input"
+                        type="number"
+                        name="site"
+                        value={item.site}
+                        disabled={formData.allSites === "1"}
+                        placeholder="PC Number"
+                        onChange={(e) => handleFormChange(i, e)}
+                        required></Box>
+                      <Box
+                        component={FontAwesomeIcon}
+                        icon={faTrash}
+                        sx={{
+                          position: "absolute",
+                          cursor: "pointer",
+                          marginLeft: "-25px",
+                          top: "50%",
+                          right: "1rem",
+                          transform: "translate(0, -50%)",
+                          transition: "color 100ms linear",
+                          animation: "none",
+                          "&:hover": {
+                            color: "red",
+                            animation: `${wiggle} 1000ms linear`,
+                          },
+                        }}
+                        onClick={(e) => removeField(i, e)}
+                      />
+                    </Box>
+                  </div>
+                ))}
+              </Box>
+            )}
+            {formData.allSites === "2" && (
+              <Button
+                disabled={formData.allSites === "1"}
+                onClick={addField}
+                sx={(theme) => ({
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "5px",
+                  padding: "0.5rem",
+                  border: "0px",
+                  backgroundColor: theme.colors.accent[0],
+                  font: "inherit",
+                  color: "white",
+                  borderRadius: "0.3rem",
+                  "&:hover": { background: theme.colors.accent[0] },
+                })}>
+                Add PC <FontAwesomeIcon icon={faPlus} />
+              </Button>
+            )}
+          </Flex>
+        </>
       )}
       <Box sx={{ width: "100%", height: "2.5rem" }}></Box>
       <Flex

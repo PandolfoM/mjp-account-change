@@ -78,8 +78,8 @@ function Form(props) {
       sx={{ display: "flex", flexDirection: "column", gap: "5px" }}
       onChange={handleChange}
       onSubmit={validateInfo}>
-      <h2>Input Details</h2>
-      <h3>{formData.type === "1" ? "Change Password" : "New Account"}</h3>
+      <Title order={2} ff={"Poppins"} fz={"1.4rem"}>Input Details</Title>
+      <Title order={4} ff={"Poppins"} fz={"1rem"} fw="500">{formData.type === "1" ? "Change Password" : "New Account"}</Title>
       <Box
         sx={{
           position: "relative",

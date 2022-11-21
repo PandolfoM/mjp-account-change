@@ -53,6 +53,7 @@ function App() {
             margin: "0",
             padding: "0",
             userSelect: "none",
+            fontFamily: "Poppins"
           },
 
           html: {

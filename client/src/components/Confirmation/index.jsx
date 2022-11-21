@@ -8,7 +8,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Box, Button, Flex } from "@mantine/core";
+import { Box, Button, Flex, Title } from "@mantine/core";
 import { useState } from "react";
 
 function Confirmation(props) {
@@ -69,8 +69,12 @@ function Confirmation(props) {
       sx={{ display: "flex", flexDirection: "column", gap: "5px" }}
       noValidate
       onSubmit={handleSubmit}>
-      <h2>Confirm Details</h2>
-      <h3>{formData.type === "1" ? "Change Password" : "New Account"}</h3>
+      <Title order={2} ff={"Poppins"} fz={"1.4rem"}>
+        Confirm Details
+      </Title>
+      <Title order={4} ff={"Poppins"} fz={"1rem"} fw="500">
+        {formData.type === "1" ? "Change Password" : "New Account"}
+      </Title>
       <Box
         sx={{
           position: "relative",
