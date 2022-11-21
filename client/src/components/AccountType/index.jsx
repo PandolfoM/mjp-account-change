@@ -58,25 +58,6 @@ function AccountType(props) {
     if (formData.allSites === "1") return setPage(page + 1);
 
     setPage(page + 1);
-
-    // for (let i = 0; i < site.length; i++) {
-    //   // console.log(site[i].site.length === 0);
-    //   if (site[i].site.length === 0) {
-    //     return setError("Site(s) left blank, please fill in or remove");
-    //   } else if (site[i].site.length >= 1) {
-    //     console.log('no err');
-    //   }
-    // }
-
-    // site.map((item, i) => {
-    //   // console.log(!item.site);
-    //   if (item.site.length === 0) {
-    //    return setError("Site(s) left blank, please fill in or remove");
-    //   } else if (item.site && formData.allSites === "2" ) {
-    //     // setPage(page + 1);
-    //     console.log('no err');
-    //   }
-    // });
   };
 
   return (
