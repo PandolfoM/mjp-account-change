@@ -8,6 +8,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Box, Button, Flex } from "@mantine/core";
 import { useState } from "react";
 
 function Confirmation(props) {
@@ -16,14 +17,14 @@ function Confirmation(props) {
   const [passwordShown, setPasswordShown] = useState(false);
 
   let displaySites = [];
-  
+
   site.map((item, i) => {
     displaySites.push(item.site);
   });
 
-  let filtered = displaySites.filter(function(el) {
-    return el != ""
-  })
+  let filtered = displaySites.filter(function (el) {
+    return el != "";
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,75 +64,211 @@ function Confirmation(props) {
   };
 
   return (
-    <form className="form" noValidate onSubmit={handleSubmit}>
+    <Box
+      component="form"
+      sx={{ display: "flex", flexDirection: "column", gap: "5px" }}
+      noValidate
+      onSubmit={handleSubmit}>
       <h2>Confirm Details</h2>
       <br />
       <h3>{formData.type === "1" ? "Change Password" : "New Account"}</h3>
-      <div className="input-container">
-        <FontAwesomeIcon icon={faLocationDot} className="fieldIcon" />
-        <input
+      <Box
+        sx={{
+          position: "relative",
+          overflow: "hidden",
+          borderRadius: "0.3rem",
+        }}>
+        <FontAwesomeIcon
+          icon={faLocationDot}
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "1rem",
+            transform: "translate(0, -50%)",
+          }}
+        />
+        <Box
+          sx={{ width: "100%" }}
+          component="input"
           type="text"
           defaultValue={
             formData.allSites === "1" ? "All Sites" : filtered.join(", ")
           }
           disabled
-          placeholder="Sites"></input>
-      </div>
+          placeholder="Sites"></Box>
+      </Box>
 
-      <div className="input-container">
-        <FontAwesomeIcon icon={faSignature} className="fieldIcon" />
-        <input
+      <Box
+        sx={{
+          position: "relative",
+          overflow: "hidden",
+          borderRadius: "0.3rem",
+        }}>
+        <FontAwesomeIcon
+          icon={faSignature}
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "1rem",
+            transform: "translate(0, -50%)",
+          }}
+        />
+        <Box
+          sx={{ width: "100%" }}
+          component="input"
           type="text"
           disabled
-          defaultValue={formData.name}></input>
-      </div>
+          defaultValue={formData.name}></Box>
+      </Box>
 
-      <div className="input-container">
-        <FontAwesomeIcon icon={faNetworkWired} className="fieldIcon" />
-        <input
+      <Box
+        sx={{
+          position: "relative",
+          overflow: "hidden",
+          borderRadius: "0.3rem",
+        }}>
+        <FontAwesomeIcon
+          icon={faNetworkWired}
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "1rem",
+            transform: "translate(0, -50%)",
+          }}
+        />
+        <Box
+          sx={{ width: "100%" }}
+          component="input"
           type="text"
           disabled
-          defaultValue={formData.network}></input>
-      </div>
+          defaultValue={formData.network}></Box>
+      </Box>
 
-      <div className="input-container">
-        <FontAwesomeIcon icon={faEnvelope} className="fieldIcon" />
-        <input
+      <Box
+        sx={{
+          position: "relative",
+          overflow: "hidden",
+          borderRadius: "0.3rem",
+        }}>
+        <FontAwesomeIcon
+          icon={faEnvelope}
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "1rem",
+            transform: "translate(0, -50%)",
+          }}
+        />
+        <Box
+          sx={{ width: "100%" }}
+          component="input"
           type="email"
           disabled
-          defaultValue={formData.email}></input>
-      </div>
+          defaultValue={formData.email}></Box>
+      </Box>
 
-      <div className="input-container">
-        <FontAwesomeIcon icon={faUser} className="fieldIcon" />
-        <input
+      <Box
+        sx={{
+          position: "relative",
+          overflow: "hidden",
+          borderRadius: "0.3rem",
+        }}>
+        <FontAwesomeIcon
+          icon={faUser}
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "1rem",
+            transform: "translate(0, -50%)",
+          }}
+        />
+        <Box
+          sx={{ width: "100%" }}
+          component="input"
           type="text"
           disabled
-          defaultValue={formData.username}></input>
-      </div>
+          defaultValue={formData.username}></Box>
+      </Box>
 
-      <div className="input-container">
-        <FontAwesomeIcon icon={faLock} className="fieldIcon" />
-        <input
+      <Box
+        sx={{
+          position: "relative",
+          overflow: "hidden",
+          borderRadius: "0.3rem",
+        }}>
+        <FontAwesomeIcon
+          icon={faLock}
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "1rem",
+            transform: "translate(0, -50%)",
+          }}
+        />
+        <Box
+          sx={{ width: "100%" }}
+          component="input"
           type={passwordShown ? "text" : "password"}
           disabled
-          defaultValue={formData.password}></input>
+          defaultValue={formData.password}></Box>
         <FontAwesomeIcon
           icon={passwordShown ? faEye : faEyeSlash}
-          className="end-icon"
+          style={{
+            position: "absolute",
+            cursor: "pointer",
+            marginLeft: "-25px",
+            top: "50%",
+            right: "1rem",
+            transform: "translate(0, -50%)",
+          }}
           onClick={() => setPasswordShown(!passwordShown)}
         />
-      </div>
-
-      <div className="interact-btns">
-        <button onClick={() => setPage(page - 1)} className="nav-btn">
+      </Box>
+      <Box sx={{ width: "100%", height: "2.5rem" }}></Box>
+      <Flex
+        gap={"1rem"}
+        justify="flex-end"
+        sx={{ width: "100%", height: "2.5rem" }}>
+        <Button
+          sx={(theme) => ({
+            width: "50%",
+            position: "relative",
+            color: "white",
+            border: "none",
+            background: theme.colors.accent[0],
+            font: "inherit",
+            transition: "all 500ms ease",
+            borderRadius: "0.3rem",
+            height: "100%",
+            "&:hover": {
+              transform: "scale(1.05)",
+              background: theme.colors.accent[0],
+            },
+          })}
+          onClick={() => setPage(page - 1)}>
           Previous
-        </button>
-        <button type="submit" className="nav-btn">
+        </Button>
+        <Button
+          sx={(theme) => ({
+            width: "50%",
+            position: "relative",
+            color: "white",
+            border: "none",
+            background: theme.colors.accent[0],
+            font: "inherit",
+            transition: "all 500ms ease",
+            borderRadius: "0.3rem",
+            height: "100%",
+            "&:hover": {
+              transform: "scale(1.05)",
+              background: theme.colors.accent[0],
+            },
+          })}
+          type="submit">
           {status}
-        </button>
-      </div>
-    </form>
+        </Button>
+      </Flex>
+    </Box>
   );
 }
 

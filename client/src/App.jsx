@@ -69,6 +69,9 @@ function App() {
             ),
           },
         }),
+        colors: {
+          accent: ["#1789fc"]
+        }
       }}
       withGlobalStyles
       withNormalizeCSS>
